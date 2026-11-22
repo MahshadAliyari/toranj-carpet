@@ -1,7 +1,7 @@
 
 /* =====================================================
    FARSH IRAN
-   JavaScript - Product API, Search & Shopping Cart
+   Main JavaScript
 ===================================================== */
 
 
@@ -20,16 +20,30 @@ const closeCart = document.getElementById("closeCart");
 const cartItems = document.getElementById("cartItems");
 const cartTotal = document.getElementById("cartTotal");
 
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+
 
 /* =====================================================
-   02. API URL & VARIABLES
+   02. API & GLOBAL VARIABLES
 ===================================================== */
 
 const API_URL = "https://fakestoreapi.com/products";
 
 let products = [];
 
-let cart = JSON.parse(localStorage.getItem("farshIranCart")) || [];
+let cart = [];
+
+try {
+    const savedCart = JSON.parse(
+        localStorage.getItem("farshIranCart")
+    );
+
+    cart = Array.isArray(savedCart) ? savedCart : [];
+
+} catch (error) {
+    cart = [];
+}
 
 
 /* =====================================================
@@ -38,21 +52,27 @@ let cart = JSON.parse(localStorage.getItem("farshIranCart")) || [];
 
 async function getProducts() {
 
-    try {
+    productsGrid.innerHTML = `
+        <div class="loading-message">
+            در حال دریافت محصولات...
+        </div>
+    `;
 
-        productsGrid.innerHTML = `
-            <div class="loading-message">
-                در حال دریافت محصولات...
-            </div>
-        `;
+    productsCount.textContent = "در حال بارگذاری...";
+
+    try {
 
         const response = await fetch(API_URL);
 
         if (!response.ok) {
-            throw new Error("خطا در دریافت اطلاعات");
+            throw new Error(`HTTP Error: ${response.status}`);
         }
 
         const data = await response.json();
+
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid API response");
+        }
 
         products = data;
 
@@ -62,12 +82,24 @@ async function getProducts() {
 
         console.error("API Error:", error);
 
-        productsGrid.innerHTML = `
-            <div class="empty-message">
-                دریافت محصولات با مشکل مواجه شد.
-                لطفاً دوباره تلاش کنید.
-            </div>
-        `;
+        productsGrid.innerHTML = "";
+
+        const errorBox = document.createElement("div");
+        errorBox.className = "empty-message";
+
+        const errorText = document.createElement("p");
+        errorText.textContent =
+            "دریافت محصولات ناموفق بود. اتصال اینترنت یا دسترسی به API را بررسی کنید.";
+
+        const retryButton = document.createElement("button");
+        retryButton.type = "button";
+        retryButton.textContent = "تلاش مجدد";
+        retryButton.className = "add-to-cart";
+        retryButton.id = "retryButton";
+
+        errorBox.append(errorText, retryButton);
+
+        productsGrid.appendChild(errorBox);
 
         productsCount.textContent = "خطا در دریافت محصولات";
 
@@ -88,32 +120,39 @@ function renderProducts(items) {
 
     if (items.length === 0) {
 
-        productsGrid.innerHTML = `
-            <div class="empty-message">
-                محصولی پیدا نشد!
-            </div>
-        `;
+        const message = document.createElement("div");
+
+        message.className = "empty-message";
+        message.textContent = "محصولی پیدا نشد!";
+
+        productsGrid.appendChild(message);
 
         return;
-
     }
 
     items.forEach(product => {
 
         const card = document.createElement("article");
-
         card.className = "product-card";
 
+        // Product Image
         const imageWrapper = document.createElement("div");
         imageWrapper.className = "product-image";
 
         const image = document.createElement("img");
+
         image.src = product.image;
         image.alt = product.title;
         image.loading = "lazy";
 
+        image.onerror = function () {
+            image.alt = "تصویر محصول در دسترس نیست";
+            image.style.display = "none";
+        };
+
         imageWrapper.appendChild(image);
 
+        // Product Information
         const info = document.createElement("div");
         info.className = "product-info";
 
@@ -126,14 +165,24 @@ function renderProducts(items) {
 
         const price = document.createElement("div");
         price.className = "product-price";
-        price.textContent = `${Number(product.price).toLocaleString("en-US")} $`;
 
+        price.textContent =
+            `${Number(product.price).toLocaleString("en-US")} $`;
+
+        // Add To Cart Button
         const addButton = document.createElement("button");
+
         addButton.className = "add-to-cart";
+        addButton.type = "button";
         addButton.textContent = "افزودن به سبد خرید";
         addButton.dataset.id = product.id;
 
-        info.append(category, title, price, addButton);
+        info.append(
+            category,
+            title,
+            price,
+            addButton
+        );
 
         card.append(imageWrapper, info);
 
@@ -150,13 +199,19 @@ function renderProducts(items) {
 
 searchInput.addEventListener("input", function () {
 
-    const searchValue = searchInput.value.trim().toLowerCase();
+    const searchValue = searchInput.value
+        .trim()
+        .toLowerCase();
 
     const filteredProducts = products.filter(product => {
 
+        const title = product.title.toLowerCase();
+
+        const category = product.category.toLowerCase();
+
         return (
-            product.title.toLowerCase().includes(searchValue) ||
-            product.category.toLowerCase().includes(searchValue)
+            title.includes(searchValue) ||
+            category.includes(searchValue)
         );
 
     });
@@ -167,14 +222,29 @@ searchInput.addEventListener("input", function () {
 
 
 /* =====================================================
-   06. ADD PRODUCT TO CART
+   06. RETRY API REQUEST
+===================================================== */
+
+productsGrid.addEventListener("click", function (event) {
+
+    if (event.target.id === "retryButton") {
+        getProducts();
+    }
+
+});
+
+
+/* =====================================================
+   07. ADD PRODUCT TO CART
 ===================================================== */
 
 productsGrid.addEventListener("click", function (event) {
 
     const button = event.target.closest(".add-to-cart");
 
-    if (!button) return;
+    if (!button || button.id === "retryButton") {
+        return;
+    }
 
     const productId = Number(button.dataset.id);
 
@@ -185,11 +255,17 @@ productsGrid.addEventListener("click", function (event) {
 
 function addToCart(productId) {
 
-    const selectedProduct = products.find(product => product.id === productId);
+    const selectedProduct = products.find(
+        product => product.id === productId
+    );
 
-    if (!selectedProduct) return;
+    if (!selectedProduct) {
+        return;
+    }
 
-    const existingProduct = cart.find(item => item.id === productId);
+    const existingProduct = cart.find(
+        item => item.id === productId
+    );
 
     if (existingProduct) {
 
@@ -198,11 +274,17 @@ function addToCart(productId) {
     } else {
 
         cart.push({
+
             id: selectedProduct.id,
+
             title: selectedProduct.title,
-            price: selectedProduct.price,
+
+            price: Number(selectedProduct.price),
+
             image: selectedProduct.image,
+
             quantity: 1
+
         });
 
     }
@@ -215,18 +297,21 @@ function addToCart(productId) {
 
 
 /* =====================================================
-   07. SAVE CART IN LOCAL STORAGE
+   08. SAVE CART IN LOCAL STORAGE
 ===================================================== */
 
 function saveCart() {
 
-    localStorage.setItem("farshIranCart", JSON.stringify(cart));
+    localStorage.setItem(
+        "farshIranCart",
+        JSON.stringify(cart)
+    );
 
 }
 
 
 /* =====================================================
-   08. DISPLAY CART ITEMS
+   09. DISPLAY CART
 ===================================================== */
 
 function renderCart() {
@@ -235,11 +320,13 @@ function renderCart() {
 
     if (cart.length === 0) {
 
-        cartItems.innerHTML = `
-            <div class="empty-message">
-                سبد خرید شما خالی است.
-            </div>
-        `;
+        const emptyMessage = document.createElement("div");
+
+        emptyMessage.className = "empty-message";
+
+        emptyMessage.textContent = "سبد خرید شما خالی است.";
+
+        cartItems.appendChild(emptyMessage);
 
     }
 
@@ -249,29 +336,44 @@ function renderCart() {
 
         cartItem.className = "cart-item";
 
+        // Image
         const image = document.createElement("img");
+
         image.src = item.image;
         image.alt = item.title;
 
+        // Information
         const info = document.createElement("div");
+
         info.className = "cart-item-info";
 
         const title = document.createElement("h4");
+
         title.textContent = item.title;
 
         const price = document.createElement("p");
+
         price.textContent =
             `${Number(item.price).toLocaleString("en-US")} $`;
 
         const quantity = document.createElement("p");
+
         quantity.textContent = `تعداد: ${item.quantity}`;
 
+        // Remove Button
         const removeButton = document.createElement("button");
+
         removeButton.className = "remove-cart-item";
+        removeButton.type = "button";
         removeButton.textContent = "حذف";
         removeButton.dataset.id = item.id;
 
-        info.append(title, price, quantity, removeButton);
+        info.append(
+            title,
+            price,
+            quantity,
+            removeButton
+        );
 
         cartItem.append(image, info);
 
@@ -285,22 +387,22 @@ function renderCart() {
 
 
 /* =====================================================
-   09. UPDATE CART COUNT & TOTAL PRICE
+   10. UPDATE CART COUNT & TOTAL
 ===================================================== */
 
 function updateCartSummary() {
 
-    const totalQuantity = cart.reduce((total, item) => {
+    // Total Quantity
+    const totalQuantity = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
 
-        return total + item.quantity;
-
-    }, 0);
-
-    const totalPrice = cart.reduce((total, item) => {
-
-        return total + item.price * item.quantity;
-
-    }, 0);
+    // Total Price
+    const totalPrice = cart.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+    );
 
     cartCount.textContent = totalQuantity;
 
@@ -311,14 +413,16 @@ function updateCartSummary() {
 
 
 /* =====================================================
-   10. REMOVE PRODUCT FROM CART
+   11. REMOVE PRODUCT FROM CART
 ===================================================== */
 
 cartItems.addEventListener("click", function (event) {
 
     const button = event.target.closest(".remove-cart-item");
 
-    if (!button) return;
+    if (!button) {
+        return;
+    }
 
     const productId = Number(button.dataset.id);
 
@@ -332,7 +436,7 @@ cartItems.addEventListener("click", function (event) {
 
 
 /* =====================================================
-   11. OPEN & CLOSE CART
+   12. OPEN CART
 ===================================================== */
 
 cartButton.addEventListener("click", function () {
@@ -341,11 +445,17 @@ cartButton.addEventListener("click", function () {
 
 });
 
+
+/* =====================================================
+   13. CLOSE CART
+===================================================== */
+
 closeCart.addEventListener("click", function () {
 
     cartOverlay.classList.remove("active");
 
 });
+
 
 cartOverlay.addEventListener("click", function (event) {
 
@@ -359,38 +469,35 @@ cartOverlay.addEventListener("click", function (event) {
 
 
 /* =====================================================
-   12. MOBILE MENU
+   14. MOBILE MENU
 ===================================================== */
 
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.querySelector(".nav");
+menuToggle.addEventListener("click", function () {
 
-if (menuToggle && nav) {
+    const isOpen = mainNav.classList.toggle("active");
 
-    menuToggle.addEventListener("click", function () {
+    menuToggle.setAttribute("aria-expanded", isOpen);
 
-        nav.classList.toggle("active");
+});
 
-    });
 
-    nav.addEventListener("click", function (event) {
+mainNav.addEventListener("click", function (event) {
 
-        if (event.target.closest("a")) {
+    if (event.target.closest("a")) {
 
-            nav.classList.remove("active");
+        mainNav.classList.remove("active");
 
-        }
+        menuToggle.setAttribute("aria-expanded", "false");
 
-    });
+    }
 
-}
+});
 
 
 /* =====================================================
-   13. INITIALIZE APP
+   15. INITIALIZE APPLICATION
 ===================================================== */
-
-getProducts();
 
 renderCart();
 
+getProducts();

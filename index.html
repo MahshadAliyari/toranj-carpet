@@ -6,155 +6,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="گالری فرش ایران؛ تلفیقی از هنر اصیل ایرانی و زیبایی مدرن">
+    <title>FARSH IRAN | فروشگاه فرش ایرانی</title>
 
-    <title>فرش ایران | هنر ماندگار ایرانی</title>
+    <meta name="description" content="فروشگاه آنلاین فرش ایران">
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- JavaScript -->
     <script src="js/app.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Header -->
+    <!-- HEADER -->
     <header class="header">
+        <div class="header-inner">
 
-        <div class="container header-inner">
-
-            <a href="#" class="logo">
+            <a href="#home" class="logo">
                 <span class="logo-icon">✦</span>
-                <span>فرش ایران</span>
+                <span>FARSH <strong>IRAN</strong></span>
             </a>
 
-            <nav class="nav">
+            <nav class="nav" id="mainNav">
                 <a href="#home">صفحه اصلی</a>
                 <a href="#products">محصولات</a>
-                <a href="#about">داستان ما</a>
-                <a href="#contact">ارتباط با ما</a>
+                <a href="#about">درباره ما</a>
+                <a href="#contact">تماس با ما</a>
             </nav>
 
             <div class="header-actions">
 
-                <button class="cart-button" id="cartButton">
+                <button class="cart-button" id="cartButton" type="button">
                     <span>سبد خرید</span>
                     <span class="cart-count" id="cartCount">0</span>
                 </button>
 
-                <button class="menu-toggle" id="menuToggle"
-                    aria-label="باز کردن منو">
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="باز کردن منو"
+                    aria-expanded="false"
+                >
                     ☰
                 </button>
 
             </div>
 
         </div>
-
     </header>
 
 
-    <!-- Hero -->
+    <!-- HERO -->
     <main>
 
         <section class="hero" id="home">
-
-            <div class="container hero-inner">
+            <div class="hero-inner">
 
                 <div class="hero-content">
 
-                    <span class="eyebrow">
-                        هنر اصیل، زیبایی ماندگار
-                    </span>
+                    <span class="eyebrow">اصالت هنر ایرانی</span>
 
                     <h1>
-                        روایت زیبایی
-                        <span>در تار و پود ایران</span>
+                        زیبایی را
+                        <span>متفاوت تجربه کن</span>
                     </h1>
 
                     <p>
-                        فرش ایرانی تنها یک محصول نیست؛
-                        روایتی از هنر، اصالت و فرهنگی است
-                        که نسل به نسل ماندگار شده است.
+                        فرش ایرانی، تلفیقی از هنر، اصالت و زیبایی
+                        برای خانه‌ای گرم و دلنشین.
                     </p>
 
                     <a href="#products" class="hero-button">
-                        مشاهده مجموعه
-                        <span>←</span>
+                        مشاهده محصولات
                     </a>
 
                 </div>
 
-                <div class="hero-visual">
-
-                    <div class="hero-frame">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000"
-                            alt="فضای داخلی با طراحی لوکس">
-
+                <div class="hero-frame">
+                    <div class="hero-decoration">✦</div>
+                    <div class="hero-art">
+                        <span>فرش ایران</span>
+                        <strong>THE ART OF PERSIAN CARPET</strong>
                     </div>
-
-                    <span class="hero-decoration">✺</span>
-
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- Products -->
+        <!-- PRODUCTS -->
         <section class="products-section" id="products">
 
-            <div class="container">
+            <div class="section-heading">
+                <span class="eyebrow">COLLECTION</span>
+                <h2>محصولات فروشگاه</h2>
+                <p>محصولات دریافت‌شده از API</p>
+            </div>
 
-                <div class="section-heading">
+            <div class="products-toolbar">
 
-                    <span class="eyebrow">
-                        انتخابی از مجموعه ما
-                    </span>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="جست‌وجوی محصول..."
+                    aria-label="جست‌وجوی محصول"
+                >
 
-                    <h2>محصولات فروشگاه</h2>
+                <span id="productsCount">در حال دریافت محصولات...</span>
 
-                    <p>
-                        مجموعه‌ای از انتخاب‌های خاص و متفاوت
-                    </p>
+            </div>
 
-                </div>
+            <div class="products-grid" id="productsGrid">
 
-
-                <!-- Search -->
-                <div class="products-toolbar">
-
-                    <input
-                        type="search"
-                        id="searchInput"
-                        placeholder="نام محصول مورد نظرت را جستجو کن..."
-                        aria-label="جستجوی محصولات">
-
-                    <span id="productsCount">
-                        در حال دریافت محصولات...
-                    </span>
-
-                </div>
-
-
-                <!-- Products Container -->
-                <div class="products-grid" id="productsContainer">
-
-                    <p class="loading-message">
-                        در حال دریافت محصولات...
-                    </p>
-
+                <div class="loading-message">
+                    در حال دریافت محصولات...
                 </div>
 
             </div>
@@ -162,26 +131,22 @@
         </section>
 
 
-        <!-- About -->
+        <!-- ABOUT -->
         <section class="about-section" id="about">
 
-            <div class="container about-inner">
+            <div class="about-inner">
+
+                <div class="about-symbol">✦</div>
 
                 <div>
-                    <span class="eyebrow">میراثی از هنر و اصالت</span>
-
-                    <h2>
-                        زیبایی، در جزئیات
-                        <span>معنا پیدا می‌کند.</span>
-                    </h2>
+                    <span class="eyebrow">ABOUT US</span>
+                    <h2>هنر ایرانی، زیبایی ماندگار</h2>
 
                     <p>
-                        هر نقش و هر رنگ در هنر ایرانی،
-                        داستانی از فرهنگ و خلاقیت را روایت می‌کند.
+                        فرش ایران با الهام از هنر و اصالت ایرانی،
+                        تجربه‌ای متفاوت از زیبایی را به خانه شما می‌آورد.
                     </p>
                 </div>
-
-                <div class="about-symbol">✺</div>
 
             </div>
 
@@ -190,34 +155,39 @@
     </main>
 
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer" id="contact">
 
-        <div class="container">
+        <div class="footer-content">
 
-            <h2>فرش ایران</h2>
+            <a href="#home" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>FARSH <strong>IRAN</strong></span>
+            </a>
 
-            <p>
-                هنر ایرانی، ماندگار در گذر زمان
-            </p>
+            <p>زیبایی و اصالت در کنار یکدیگر</p>
 
-            <span>© تمامی حقوق محفوظ است.</span>
+            <p>تمامی حقوق محفوظ است ©</p>
 
         </div>
 
     </footer>
 
 
-    <!-- Cart Drawer -->
+    <!-- CART OVERLAY -->
     <div class="cart-overlay" id="cartOverlay">
 
-        <aside class="cart-drawer">
+        <aside class="cart-drawer" aria-label="سبد خرید">
 
             <div class="cart-header">
 
                 <h2>سبد خرید شما</h2>
 
-                <button id="closeCart" aria-label="بستن سبد خرید">
+                <button
+                    id="closeCart"
+                    type="button"
+                    aria-label="بستن سبد خرید"
+                >
                     ✕
                 </button>
 
@@ -225,7 +195,9 @@
 
             <div class="cart-items" id="cartItems">
 
-                <p>سبد خرید شما خالی است.</p>
+                <div class="empty-message">
+                    سبد خرید شما خالی است.
+                </div>
 
             </div>
 
@@ -233,7 +205,7 @@
 
                 <div class="cart-total">
                     <span>مبلغ کل:</span>
-                    <strong id="cartTotal">0</strong>
+                    <strong id="cartTotal">0 $</strong>
                 </div>
 
             </div>
@@ -243,5 +215,4 @@
     </div>
 
 </body>
-
 </html>
