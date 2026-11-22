@@ -1,13 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#3b080d">
-
-  <title>فرش ایران | اصالت هنر ایرانی</title>
-  <meta name="description" content="فروشگاه فرش ایران؛ مجموعه‌ای از فرش‌های اصیل ایرانی">
+  <meta name="description" content="فروشگاه فرش ایران؛ انتخابی از هنر و اصالت ایرانی">
+  <title>فرش ایران | هنر اصیل ایرانی</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,265 +16,395 @@
 
 <body>
 
-  <!-- نوار بالایی -->
   <div class="top-strip">
-    <span>هنر اصیل ایرانی، جلوه‌ای از زیبایی ماندگار</span>
+    <span>هنر اصیل ایرانی، زیبایی ماندگار خانه شما</span>
     <span>ارسال به سراسر ایران</span>
   </div>
 
-  <!-- هدر -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
 
-      <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
 
       <a href="#home" class="logo">
         <span class="logo-mark">ف</span>
         <span class="logo-text">
           <strong>فرش ایران</strong>
-          <small>هنر ماندگار سرزمین ما</small>
+          <small>هنر اصیل ایرانی</small>
         </span>
       </a>
 
       <nav class="nav" id="mainNav">
-        <a href="#home" class="active">خانه</a>
+        <a href="#home">خانه</a>
         <a href="#categories">دسته‌بندی‌ها</a>
-        <a href="#products">فروشگاه</a>
+        <a href="#products">محصولات</a>
+        <a href="#gallery">در خانه شما</a>
         <a href="#about">درباره ما</a>
         <a href="#contact">تماس با ما</a>
       </nav>
 
-      <button class="cart-button" id="cartButton" aria-label="سبد خرید">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"/>
-          <circle cx="10" cy="20" r="1.3"/>
-          <circle cx="18" cy="20" r="1.3"/>
-        </svg>
-        <span>سبد خرید</span>
-        <b class="cart-count" id="cartCount">0</b>
-      </button>
+      <div class="header-actions">
+        <button class="auth-button" id="authButton" aria-label="ورود به حساب">♙</button>
+        <button class="cart-button" id="cartButton">
+          <span>سبد خرید</span>
+          <span class="cart-count" id="cartCount">۰</span>
+        </button>
+      </div>
 
     </div>
   </header>
 
   <main>
 
-    <!-- بخش اصلی -->
+    <!-- HERO -->
     <section class="hero" id="home">
-      <div class="hero-pattern"></div>
-
       <div class="hero-inner">
 
-        <div class="hero-side-decoration">
-          <div class="hero-arch">
-            <div class="hero-arch-inner">
-              <span class="arch-star">✦</span>
-              <span class="arch-caption">اصالت و زیبایی</span>
-            </div>
+        <div class="hero-photo hero-photo-left">
+          <div class="hero-photo-frame">
+            <img src="assets/images/irani.jpg" alt="هنر بافت فرش ایرانی">
           </div>
+          <span class="photo-caption">هنر دست ایرانی</span>
         </div>
 
         <div class="hero-content">
-          <span class="eyebrow">
-            <i></i>
-            روایت هنر و اصالت
-            <i></i>
-          </span>
+          <span class="eyebrow">اصالت، هنر، زیبایی</span>
 
           <h1>
-            فرش ایران؛
-            <span>هنر ماندگار</span>
-            سرزمین ما
+            شکوه هنر ایرانی
+            <br>
+            <em>در تار و پود خانه شما</em>
           </h1>
 
           <p>
-            هر گره، روایت یک هنر است؛
-            سفری در دنیای نقش‌ها و رنگ‌های اصیل ایرانی.
+            مجموعه‌ای از زیباترین فرش‌های ایرانی؛
+            تلفیقی از اصالت، ظرافت و هنر ماندگار.
           </p>
 
-          <a href="#products" class="hero-button">
-            مشاهده محصولات
-            <span>←</span>
+          <a href="#products" class="primary-link">
+            مشاهده محصولات <span>←</span>
           </a>
+
+          <div class="hero-seal">
+            <span>✦</span>
+            <small>نقش ماندگار ایران</small>
+            <span>✦</span>
+          </div>
         </div>
 
-        <div class="hero-art">
-          <div class="hero-art-frame">
-            <div class="hero-art-inner">
-              <span class="hero-art-symbol">✺</span>
-              <span class="hero-art-text">PERSIAN</span>
-              <span class="hero-art-subtext">CARPET COLLECTION</span>
-            </div>
+        <div class="hero-photo hero-photo-right">
+          <div class="hero-photo-frame">
+            <img src="assets/images/footer.jpg" alt="فرش ایرانی در فضای سنتی">
           </div>
-          <span class="hero-art-number">01</span>
+          <span class="photo-caption">روایت نقش و رنگ</span>
         </div>
 
       </div>
 
-      <div class="hero-bottom-ornament">✥</div>
+      <div class="hero-bottom-ornament">✦ ❖ ✦ ❖ ✦</div>
     </section>
 
-    <!-- نوار ویژگی‌ها -->
+    <!-- FEATURES -->
     <section class="features">
-      <div class="feature-item">
-        <span class="feature-icon">✥</span>
-        <div>
-          <strong>طرح‌های اصیل ایرانی</strong>
-          <small>الهام گرفته از هنر کهن</small>
-        </div>
-      </div>
 
-      <span class="feature-divider"></span>
-
-      <div class="feature-item">
-        <span class="feature-icon">❖</span>
-        <div>
-          <strong>تنوع در نقش و رنگ</strong>
-          <small>انتخابی برای هر سلیقه</small>
-        </div>
-      </div>
-
-      <span class="feature-divider"></span>
-
-      <div class="feature-item">
+      <article class="feature-item">
         <span class="feature-icon">✧</span>
         <div>
-          <strong>خرید آسان و مطمئن</strong>
-          <small>تجربه خریدی دلنشین</small>
+          <strong>تضمین کیفیت</strong>
+          <p>انتخابی باکیفیت و ماندگار</p>
         </div>
-      </div>
+      </article>
+
+      <i class="feature-divider"></i>
+
+      <article class="feature-item">
+        <span class="feature-icon">◇</span>
+        <div>
+          <strong>تنوع محصولات</strong>
+          <p>طرح‌هایی برای هر سلیقه</p>
+        </div>
+      </article>
+
+      <i class="feature-divider"></i>
+
+      <article class="feature-item">
+        <span class="feature-icon">✦</span>
+        <div>
+          <strong>ارسال مطمئن</strong>
+          <p>ارسال به سراسر کشور</p>
+        </div>
+      </article>
+
     </section>
 
-    <!-- دسته‌بندی‌ها -->
-    <section class="categories-section" id="categories">
+    <!-- CATEGORIES -->
+    <section class="categories-section section-wrap" id="categories">
+
       <div class="section-heading">
-        <span class="section-kicker">دنیای نقش و نگار</span>
-        <h2>دسته‌بندی محصولات</h2>
-        <p>زیبایی فرش ایرانی را در طرح‌های گوناگون کشف کنید</p>
+        <span class="eyebrow">انتخاب بر اساس سلیقه شما</span>
+        <h2>دسته‌بندی فرش‌ها</h2>
+        <p>از نقش‌های اصیل تا طرح‌های امروزی</p>
       </div>
 
       <div class="categories-grid">
 
-        <a href="#products" class="category-card">
-          <span class="category-ornament"></span>
+        <button class="category-card" type="button" data-category="فرش دستباف">
           <span class="category-number">۰۱</span>
-          <span class="category-name">فرش دستباف</span>
-          <span class="category-line"></span>
+          <span class="category-arch">
+            <img src="assets/images/farsh-6.jpg" alt="فرش دستباف">
+          </span>
+          <strong>فرش دستباف</strong>
+          <small>هنر دست و اصالت</small>
           <span class="category-arrow">←</span>
-        </a>
+        </button>
 
-        <a href="#products" class="category-card">
-          <span class="category-ornament"></span>
+        <button class="category-card" type="button" data-category="فرش ماشینی">
           <span class="category-number">۰۲</span>
-          <span class="category-name">فرش ماشینی</span>
-          <span class="category-line"></span>
+          <span class="category-arch">
+            <img src="assets/images/farsh-1.jpg" alt="فرش ماشینی">
+          </span>
+          <strong>فرش ماشینی</strong>
+          <small>زیبایی و کاربرد</small>
           <span class="category-arrow">←</span>
-        </a>
+        </button>
 
-        <a href="#products" class="category-card">
-          <span class="category-ornament"></span>
+        <button class="category-card" type="button" data-category="فرش کلاسیک">
           <span class="category-number">۰۳</span>
-          <span class="category-name">فرش کلاسیک</span>
-          <span class="category-line"></span>
+          <span class="category-arch">
+            <img src="assets/images/farsh-4.jpg" alt="فرش کلاسیک">
+          </span>
+          <strong>فرش کلاسیک</strong>
+          <small>نقش‌های ماندگار</small>
           <span class="category-arrow">←</span>
-        </a>
+        </button>
 
-        <a href="#products" class="category-card">
-          <span class="category-ornament"></span>
+        <button class="category-card" type="button" data-category="فرش مدرن">
           <span class="category-number">۰۴</span>
-          <span class="category-name">فرش مدرن</span>
-          <span class="category-line"></span>
+          <span class="category-arch">
+            <img src="assets/images/farsh-5.jpg" alt="فرش مدرن">
+          </span>
+          <strong>فرش مدرن</strong>
+          <small>سادگی معاصر</small>
           <span class="category-arrow">←</span>
-        </a>
+        </button>
 
       </div>
     </section>
 
-    <!-- محصولات -->
+    <!-- PRODUCTS -->
     <section class="products-section" id="products">
+      <div class="section-wrap">
 
-      <div class="products-top">
         <div class="section-heading products-heading">
-          <span class="section-kicker">منتخب مجموعه فرش ایران</span>
-          <h2>گنجینه فرش‌های ایرانی</h2>
-          <p>نقش‌هایی که زیبایی را به خانه شما می‌آورند</p>
+          <span class="eyebrow">منتخب مجموعه ما</span>
+          <h2>فرش‌های منتخب</h2>
+          <p>نقشی ماندگار برای فضای زندگی شما</p>
         </div>
 
         <div class="products-toolbar">
           <label class="search-box">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="10.8" cy="10.8" r="6.8"></circle>
-              <path d="m16 16 5 5"></path>
-            </svg>
-            <input
-              type="search"
-              id="searchInput"
-              placeholder="جستجوی فرش..."
-              aria-label="جستجوی محصولات"
-            >
+            <span>⌕</span>
+            <input type="search" id="searchInput" placeholder="جستجوی نام یا دسته فرش...">
           </label>
-
-          <span class="products-count" id="productsCount">در حال بارگذاری...</span>
+          <span class="products-count" id="productsCount">در حال بارگذاری</span>
         </div>
-      </div>
 
-      <div class="products-grid" id="productsGrid">
-        <!-- محصولات با JavaScript نمایش داده می‌شوند -->
-      </div>
+        <div class="filter-panel">
 
-      <div class="products-bottom">
-        <span>✥</span>
-        <p>زیبایی در جزئیات نهفته است</p>
-        <span>✥</span>
-      </div>
+          <div class="filter-row">
+            <span class="filter-label">دسته‌بندی:</span>
+            <button class="filter-chip active" type="button" data-filter-category="all">همه</button>
+            <button class="filter-chip" type="button" data-filter-category="فرش دستباف">دستباف</button>
+            <button class="filter-chip" type="button" data-filter-category="فرش ماشینی">ماشینی</button>
+            <button class="filter-chip" type="button" data-filter-category="فرش کلاسیک">کلاسیک</button>
+            <button class="filter-chip" type="button" data-filter-category="فرش مدرن">مدرن</button>
+          </div>
 
+          <div class="filter-row color-row">
+            <span class="filter-label">رنگ غالب:</span>
+            <button class="color-option active" type="button" data-filter-color="all" aria-label="همه رنگ‌ها">
+              <span>همه</span>
+            </button>
+            <button class="color-option" type="button" data-filter-color="قرمز" style="--swatch:#8c2630" aria-label="قرمز"></button>
+            <button class="color-option" type="button" data-filter-color="کرم" style="--swatch:#d7c4a3" aria-label="کرم"></button>
+            <button class="color-option" type="button" data-filter-color="سرمه‌ای" style="--swatch:#263b63" aria-label="سرمه‌ای"></button>
+            <button class="color-option" type="button" data-filter-color="قهوه‌ای" style="--swatch:#795039" aria-label="قهوه‌ای"></button>
+            <button class="color-option" type="button" data-filter-color="طوسی" style="--swatch:#858585" aria-label="طوسی"></button>
+          </div>
+
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          <p class="loading-message">در حال آماده‌سازی مجموعه فرش‌ها...</p>
+        </div>
+
+        <div class="products-bottom">
+          <span>✦</span>
+          <p>زیبایی در جزئیات نهفته است</p>
+          <span>✦</span>
+        </div>
+
+      </div>
     </section>
 
-    <!-- درباره ما -->
-    <section class="about-section" id="about">
-      <div class="about-pattern"></div>
+    <!-- GALLERY -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-wrap">
 
-      <div class="about-inner">
-        <div class="about-emblem">
-          <div class="about-emblem-inner">
-            <span>ف</span>
-            <small>IRAN</small>
-          </div>
+        <div class="section-heading">
+          <span class="eyebrow">الهام برای خانه شما</span>
+          <h2>فرش در فضای زندگی</h2>
+          <p>ترکیب نقش ایرانی با دکوراسیون خانه</p>
+        </div>
+
+        <div class="gallery-grid">
+          <a href="#products" class="gallery-card gallery-large">
+            <img src="assets/images/room-1.jpg" alt="فرش ایرانی در پذیرایی">
+            <span>گرمای اصالت در خانه</span>
+          </a>
+
+          <a href="#products" class="gallery-card">
+            <img src="assets/images/room-2.jpg" alt="فرش در دکوراسیون کلاسیک">
+            <span>زیبایی کلاسیک</span>
+          </a>
+
+          <a href="#products" class="gallery-card">
+            <img src="assets/images/room-3.jpg" alt="فرش در فضای مدرن">
+            <span>هماهنگی با زندگی امروز</span>
+          </a>
+
+          <a href="#products" class="gallery-card">
+            <img src="assets/images/room-4.jpg" alt="فرش دستباف در خانه">
+            <span>هنر دست ایرانی</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="about-inner section-wrap">
+
+        <div class="about-visual">
+          <img src="assets/images/horse.jpg" alt="فرش ایرانی در فضای معماری سنتی">
+          <span class="about-stamp">اصالت<br>ایرانی</span>
         </div>
 
         <div class="about-content">
-          <span class="section-kicker">داستان ما</span>
-          <h2>هنر فرش، روایت فرهنگ ایران</h2>
+          <span class="eyebrow">داستان ما</span>
+          <h2>روایتی از هنر و اصالت ایرانی</h2>
+
           <p>
-            فرش ایرانی تنها یک محصول نیست؛ بخشی از هویت، فرهنگ و هنر
-            سرزمینی است که زیبایی را در تار و پود زندگی جاری کرده است.
-            ما در فرش ایران تلاش می‌کنیم جلوه‌ای از این هنر ماندگار
-            را به خانه‌های شما بیاوریم.
+            فرش ایرانی تنها یک محصول نیست؛ روایتگر تاریخ، فرهنگ و هنر مردمانی است
+            که زیبایی را در تار و پود زندگی خود بافته‌اند.
           </p>
-          <a href="#contact" class="about-link">بیشتر با ما آشنا شوید ←</a>
+
+          <p>
+            در فرش ایران تلاش می‌کنیم مجموعه‌ای از طرح‌ها و نقش‌های زیبا را
+            برای خانه‌های شما فراهم کنیم؛ انتخابی که سال‌ها همراه شما بماند.
+          </p>
+
+          <a href="#contact" class="text-link">بیشتر با ما آشنا شوید ←</a>
         </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section section-wrap" id="contact">
+
+      <div class="section-heading">
+        <span class="eyebrow">ارتباط با ما</span>
+        <h2>همیشه در کنار شما هستیم</h2>
+        <p>برای دریافت راهنمایی با ما در ارتباط باشید</p>
+      </div>
+
+      <div class="contact-inner">
+
+        <div class="contact-info">
+          <div class="contact-detail">
+            <span>☎</span>
+            <div>
+              <strong>شماره تماس</strong>
+              <p>۰۲۱-۱۲۳۴۵۶۷۸</p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <span>✉</span>
+            <div>
+              <strong>ایمیل</strong>
+              <p>info@farshiran.ir</p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <span>⌖</span>
+            <div>
+              <strong>آدرس</strong>
+              <p>تهران، ایران</p>
+            </div>
+          </div>
+
+          <div class="contact-note">
+            برای انتخاب بهتر فرش، می‌توانید از طریق فرم روبه‌رو پیام بگذارید.
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-heading">
+            <h3>پیام خود را ارسال کنید</h3>
+            <p>فیلدهای ستاره‌دار الزامی هستند</p>
+          </div>
+
+          <div class="form-row">
+            <input type="text" name="name" placeholder="نام و نام خانوادگی *" required>
+            <input type="tel" name="phone" placeholder="شماره تماس *" required>
+          </div>
+
+          <input type="email" name="email" placeholder="ایمیل (اختیاری)">
+
+          <select name="subject" required>
+            <option value="">موضوع پیام *</option>
+            <option>مشاوره خرید</option>
+            <option>پیگیری سفارش</option>
+            <option>سایر موارد</option>
+          </select>
+
+          <textarea name="message" rows="4" placeholder="متن پیام شما *" required></textarea>
+
+          <button type="submit" class="submit-button">ارسال پیام</button>
+          <p id="contactFeedback" class="form-feedback" aria-live="polite"></p>
+        </form>
+
       </div>
     </section>
 
   </main>
 
-  <!-- فوتر -->
-  <footer class="footer" id="contact">
-    <div class="footer-inner">
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner section-wrap">
 
       <div class="footer-brand">
-        <a href="#home" class="logo footer-logo">
+        <a href="#home" class="logo">
           <span class="logo-mark">ف</span>
           <span class="logo-text">
             <strong>فرش ایران</strong>
-            <small>هنر ماندگار سرزمین ما</small>
+            <small>هنر اصیل ایرانی</small>
           </span>
         </a>
-        <p>روایتی از اصالت، زیبایی و هنر ایرانی.</p>
+
+        <img src="assets/images/farsh-7.jpg" alt="جزئیات نقش فرش ایرانی" class="footer-image">
+
+        <p>
+          همراه شما برای انتخاب زیبایی، اصالت و هنر ایرانی.
+          خانه‌ای گرم‌تر با نقش و نگار فرش ایرانی.
+        </p>
       </div>
 
       <div class="footer-links">
@@ -290,49 +417,70 @@
 
       <div class="footer-contact">
         <h3>ارتباط با ما</h3>
-        <p>پاسخگوی شما برای انتخابی زیبا و ماندگار هستیم.</p>
-        <span>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</span>
-        <span>ایمیل: info@farshiran.ir</span>
+        <p>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+        <p>ایمیل: info@farshiran.ir</p>
+        <p>تهران، ایران</p>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <span>تمامی حقوق برای فروشگاه فرش ایران محفوظ است.</span>
+      <p>تمامی حقوق این وب‌سایت متعلق به فرش ایران است.</p>
       <span>طراحی شده با عشق به هنر ایرانی ✦</span>
     </div>
   </footer>
 
-  <!-- پس‌زمینه سبد خرید -->
-  <div class="cart-overlay" id="cartOverlay">
+  <!-- AUTH MODAL -->
+  <div class="auth-overlay" id="authOverlay" aria-hidden="true">
+    <div class="auth-modal" role="dialog" aria-modal="true" aria-label="ورود و ثبت‌نام">
 
+      <button class="modal-close" id="authClose" type="button" aria-label="بستن">×</button>
+
+      <div class="auth-heading">
+        <span class="logo-mark">ف</span>
+        <h2>به فرش ایران خوش آمدید</h2>
+        <p>برای ادامه وارد حساب خود شوید</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" type="button" data-auth="login">ورود</button>
+        <button class="auth-tab" type="button" data-auth="register">ثبت‌نام</button>
+      </div>
+
+      <form id="loginForm">
+        <input type="tel" name="phone" placeholder="شماره تماس" required>
+        <input type="password" name="password" placeholder="رمز عبور" required>
+        <button class="submit-button" type="submit">ورود به حساب</button>
+      </form>
+
+      <form id="registerForm" hidden>
+        <input type="text" name="name" placeholder="نام و نام خانوادگی" required>
+        <input type="tel" name="phone" placeholder="شماره تماس" required>
+        <input type="password" name="password" placeholder="رمز عبور (حداقل ۶ کاراکتر)" minlength="6" required>
+        <button class="submit-button" type="submit">ساخت حساب</button>
+      </form>
+
+      <p id="authFeedback" class="form-feedback" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true">
     <aside class="cart-drawer" aria-label="سبد خرید">
 
       <div class="cart-header">
-        <div>
-          <span class="cart-kicker">انتخاب‌های شما</span>
-          <h2>سبد خرید</h2>
-        </div>
-
-        <button id="closeCart" class="close-cart" aria-label="بستن سبد خرید">
-          ×
-        </button>
+        <h3>سبد خرید شما</h3>
+        <button id="closeCart" type="button" aria-label="بستن">×</button>
       </div>
 
-      <div class="cart-items" id="cartItems">
-        <!-- محصولات سبد خرید با JavaScript -->
-      </div>
+      <div class="cart-items" id="cartItems"></div>
 
       <div class="cart-footer">
         <div class="cart-total">
-          <span>مبلغ قابل پرداخت</span>
+          <span>مجموع خرید:</span>
           <strong id="cartTotal">۰ تومان</strong>
         </div>
-        <button class="checkout-button" type="button">
-          ادامه فرایند خرید
-          <span>←</span>
-        </button>
-        <small>هزینه ارسال در مرحله بعد محاسبه می‌شود.</small>
+        <button class="checkout-button" type="button">ادامه فرایند خرید</button>
       </div>
 
     </aside>

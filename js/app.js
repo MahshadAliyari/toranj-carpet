@@ -1,164 +1,189 @@
+"use strict";
 
-/* =========================================
-   FARSH IRAN — APP.JS
-========================================= */
+// انتخاب عناصر صفحه
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
 
+// آدرس API
 const API_URL = "https://fakestoreapi.com/products";
-const CART_KEY = "farshIranCartV2";
+const CART_KEY = "farshIranCart";
 
-// ---------- 1. انتخاب عناصر HTML ----------
+// عناصر اصلی
+const productsGrid = $("#productsGrid");
+const productsCount = $("#productsCount");
+const searchInput = $("#searchInput");
 
-const productsGrid = document.getElementById("productsGrid");
-const searchInput = document.getElementById("searchInput");
-const productsCount = document.getElementById("productsCount");
-
-const cartButton = document.getElementById("cartButton");
-const cartOverlay = document.getElementById("cartOverlay");
-const closeCart = document.getElementById("closeCart");
-const cartItems = document.getElementById("cartItems");
-const cartCount = document.getElementById("cartCount");
-const cartTotal = document.getElementById("cartTotal");
-
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
-
-// ---------- 2. اطلاعات نمایشی فرش‌ها ----------
-// عکس‌ها را بعداً در پوشه images قرار بده.
-
+// اطلاعات محصولات فروشگاه
+// عکس‌ها را خودت داخل پوشه assets/images قرار بده.
 const rugCatalog = [
   {
-    title: "فرش دستباف ترنج لاکی",
+    id: 1,
+    title: "فرش دستباف طرح لچک ترنج",
     category: "فرش دستباف",
-    price: 18500000,
-    image: "assets/images/farsh-7.jpg"
-  },
-  {
-    title: "فرش زمینه کرم گل ابریشم",
-    category: "فرش دستباف",
-    price: 22000000,
-    image: "assets/images/farsh-8.jpg"
-  },
-  {
-    title: "فرش شاه‌عباسی سرمه‌ای",
-    category: "فرش کلاسیک",
-    price: 14800000,
-    image: "assets/images/farsh-5.jpg"
-  },
-  {
-    title: "فرش طرح بته‌جقه",
-    category: "فرش کلاسیک",
-    price: 12500000,
-    image: "assets/images/farsh-3.jpg"
-  },
-  {
-    title: "فرش افشان گل‌دار",
-    category: "فرش ماشینی",
-    price: 8900000,
+    price: 28500000,
+    color: "قرمز",
     image: "assets/images/farsh-1.jpg"
   },
   {
-    title: "فرش طرح خشتی",
-    category: "فرش دستباف",
-    price: 19800000,
-    image: "assets/images/farsh-6.jpg"
+    id: 2,
+    title: "فرش ماشینی طرح افشان",
+    category: "فرش ماشینی",
+    price: 8500000,
+    color: "کرم",
+    image: "assets/images/farsh-2.jpg"
   },
   {
-    title: "فرش مدرن مینیمال",
+    id: 3,
+    title: "فرش کلاسیک طرح شاه‌عباسی",
+    category: "فرش کلاسیک",
+    price: 17200000,
+    color: "سرمه‌ای",
+    image: "assets/images/farsh-3.jpg"
+  },
+  {
+    id: 4,
+    title: "فرش مدرن طرح مینیمال",
     category: "فرش مدرن",
-    price: 7600000,
+    price: 6900000,
+    color: "طوسی",
     image: "assets/images/farsh-4.jpg"
   },
   {
+    id: 5,
+    title: "فرش دستباف طرح تبریز",
+    category: "فرش دستباف",
+    price: 42000000,
+    color: "قرمز",
+    image: "assets/images/farsh-5.jpg"
+  },
+  {
+    id: 6,
+    title: "فرش کلاسیک طرح ترنج",
+    category: "فرش کلاسیک",
+    price: 19800000,
+    color: "قهوه‌ای",
+    image: "assets/images/farsh-6.jpg"
+  },
+  {
+    id: 7,
+    title: "فرش مدرن مینیمال",
+    category: "فرش مدرن",
+    price: 7600000,
+    color: "طوسی",
+    image: "assets/images/farsh-4.jpg"
+  },
+  {
+    id: 8,
     title: "فرش لاکی گل‌ریز",
     category: "فرش کلاسیک",
     price: 16200000,
+    color: "قرمز",
     image: "assets/images/farsh-2.jpg"
   }
 ];
 
-// ---------- 3. متغیرهای برنامه ----------
-
 let products = [];
-
+let activeCategory = "all";
+let activeColor = "all";
+let searchTerm = "";
 let cart = [];
 
+// بازیابی سبد خرید از localStorage
 try {
-  const savedCart = JSON.parse(localStorage.getItem(CART_KEY));
-  cart = Array.isArray(savedCart) ? savedCart : [];
-} catch (error) {
+  const saved = JSON.parse(localStorage.getItem(CART_KEY));
+  cart = Array.isArray(saved) ? saved : [];
+} catch {
   cart = [];
 }
 
-// ---------- 4. ابزارهای کمکی ----------
+// تبدیل قیمت به قالب فارسی
+const formatPrice = value =>
+  `${new Intl.NumberFormat("fa-IR").format(value)} تومان`;
 
-function formatPrice(price) {
-  return new Intl.NumberFormat("fa-IR").format(price) + " تومان";
-}
+const faNumber = value =>
+  new Intl.NumberFormat("fa-IR").format(value);
 
+// ذخیره سبد خرید
 function saveCart() {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
-// ---------- 5. دریافت اطلاعات از API ----------
+// دریافت اطلاعات API و نمایش کاتالوگ فرش
+async function loadProducts() {
+  productsGrid.innerHTML =
+    '<p class="loading-message">در حال آماده‌سازی مجموعه فرش‌ها...</p>';
 
-async function getProducts() {
-  productsGrid.innerHTML = "<p>در حال آماده‌سازی مجموعه فرش‌ها...</p>";
   productsCount.textContent = "در حال بارگذاری";
 
   try {
     const response = await fetch(API_URL);
 
     if (!response.ok) {
-      throw new Error("دریافت اطلاعات از سرور ناموفق بود.");
+      throw new Error("API request failed");
     }
 
-    const apiProducts = await response.json();
+    const apiItems = await response.json();
 
-    // API فقط برای دریافت داده و شناسه‌های نمونه استفاده می‌شود.
-    // مشخصات و قیمت فرش‌ها از کاتالوگ محلی پروژه می‌آیند.
-
+    // اطلاعات واقعی فروشگاه از کاتالوگ محلی گرفته می‌شود.
+    // API صرفاً برای تمرین دریافت داده استفاده شده است.
     products = rugCatalog.map((rug, index) => ({
       ...rug,
-      id: apiProducts[index]?.id ?? index + 1
+      apiId: apiItems[index]?.id ?? null
     }));
 
-    renderProducts(products);
-
   } catch (error) {
-    console.error("خطا در دریافت محصولات:", error);
+    console.warn(
+      "API در دسترس نیست؛ کاتالوگ محلی نمایش داده می‌شود.",
+      error
+    );
 
-    productsGrid.innerHTML = `
-      <p class="error-message">
-        دریافت اطلاعات با مشکل روبه‌رو شد.
-        <br>
-        اتصال اینترنت را بررسی کن و دوباره تلاش کن.
-        <button class="retry-button" id="retryButton">
-          تلاش دوباره
-        </button>
-      </p>
-    `;
-
-    productsCount.textContent = "خطا در بارگذاری";
+    products = rugCatalog.map(rug => ({
+      ...rug,
+      apiId: null
+    }));
   }
+
+  renderProducts();
 }
 
-// ---------- 6. نمایش کارت محصولات ----------
+// فیلتر محصولات
+function getFilteredProducts() {
+  return products.filter(product => {
 
-function renderProducts(items) {
+    const matchesSearch =
+      `${product.title} ${product.category}`
+        .toLocaleLowerCase("fa")
+        .includes(searchTerm);
+
+    const matchesCategory =
+      activeCategory === "all" ||
+      product.category === activeCategory;
+
+    const matchesColor =
+      activeColor === "all" ||
+      product.color === activeColor;
+
+    return matchesSearch && matchesCategory && matchesColor;
+  });
+}
+
+// نمایش محصولات
+function renderProducts() {
+  const items = getFilteredProducts();
+
   productsGrid.innerHTML = "";
 
-  if (items.length === 0) {
-    productsGrid.innerHTML = `
-      <p class="error-message">
-        محصولی با این مشخصات پیدا نشد.
-      </p>
-    `;
+  productsCount.textContent =
+    `${faNumber(items.length)} محصول`;
 
-    productsCount.textContent = "۰ محصول";
+  if (!items.length) {
+    productsGrid.innerHTML =
+      '<p class="error-message">محصولی با این مشخصات پیدا نشد.</p>';
     return;
   }
 
-  items.forEach((product) => {
+  items.forEach(product => {
+
     const card = document.createElement("article");
     card.className = "product-card";
 
@@ -171,11 +196,15 @@ function renderProducts(items) {
     image.loading = "lazy";
 
     image.addEventListener("error", () => {
-      image.style.display = "none";
+      image.remove();
       imageBox.classList.add("image-missing");
-    });
+      imageBox.setAttribute(
+        "aria-label",
+        "تصویر محصول در دسترس نیست"
+      );
+    }, { once: true });
 
-    imageBox.appendChild(image);
+    imageBox.append(image);
 
     const info = document.createElement("div");
     info.className = "product-info";
@@ -187,81 +216,120 @@ function renderProducts(items) {
     const title = document.createElement("h3");
     title.textContent = product.title;
 
-    const price = document.createElement("span");
+    const price = document.createElement("strong");
     price.className = "product-price";
     price.textContent = formatPrice(product.price);
 
-    const addButton = document.createElement("button");
-    addButton.className = "add-to-cart";
-    addButton.type = "button";
-    addButton.dataset.id = product.id;
-    addButton.textContent = "افزودن به سبد خرید";
+    const add = document.createElement("button");
+    add.type = "button";
+    add.className = "add-to-cart";
+    add.dataset.id = product.id;
+    add.textContent = "افزودن به سبد خرید";
 
-    info.append(category, title, price, addButton);
+    info.append(category, title, price, add);
     card.append(imageBox, info);
 
-    productsGrid.appendChild(card);
+    productsGrid.append(card);
   });
-
-  productsCount.textContent =
-    `${new Intl.NumberFormat("fa-IR").format(items.length)} محصول`;
 }
 
-// ---------- 7. جستجوی محصولات ----------
+// جستجوی محصولات
+searchInput.addEventListener("input", event => {
+  searchTerm = event.target.value
+    .trim()
+    .toLocaleLowerCase("fa");
 
-searchInput.addEventListener("input", (event) => {
-  const searchValue = event.target.value.trim().toLowerCase();
+  renderProducts();
+});
 
-  const filteredProducts = products.filter((product) => {
-    return (
-      product.title.toLowerCase().includes(searchValue) ||
-      product.category.toLowerCase().includes(searchValue)
+// انتخاب دسته‌بندی
+function setCategory(category) {
+  activeCategory = category;
+
+  $$(".filter-chip").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.filterCategory === category
     );
   });
 
-  renderProducts(filteredProducts);
+  renderProducts();
+}
+
+// انتخاب رنگ
+function setColor(color) {
+  activeColor = color;
+
+  $$(".color-option").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.filterColor === color
+    );
+  });
+
+  renderProducts();
+}
+
+// رویداد فیلتر دسته‌بندی
+$$(".filter-chip").forEach(button => {
+  button.addEventListener("click", () => {
+    setCategory(button.dataset.filterCategory);
+  });
 });
 
-// ---------- 8. تلاش دوباره برای دریافت محصولات ----------
-
-productsGrid.addEventListener("click", (event) => {
-  if (event.target.id === "retryButton") {
-    getProducts();
-  }
+// رویداد فیلتر رنگ
+$$(".color-option").forEach(button => {
+  button.addEventListener("click", () => {
+    setColor(button.dataset.filterColor);
+  });
 });
 
-// ---------- 9. افزودن محصول به سبد خرید ----------
+// کلیک روی کارت دسته‌بندی
+$$(".category-card").forEach(button => {
+  button.addEventListener("click", () => {
+    setCategory(button.dataset.category);
 
-productsGrid.addEventListener("click", (event) => {
+    $("#products").scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
+
+// افزودن محصول به سبد خرید
+productsGrid.addEventListener("click", event => {
+
   const button = event.target.closest(".add-to-cart");
 
   if (!button) return;
 
-  const productId = Number(button.dataset.id);
-  addToCart(productId);
+  addToCart(Number(button.dataset.id));
 
-  const originalText = button.textContent;
-  button.textContent = "به سبد اضافه شد ✓";
+  const previous = button.textContent;
+
+  button.textContent = "اضافه شد ✓";
+  button.disabled = true;
 
   setTimeout(() => {
-    button.textContent = originalText;
-  }, 1000);
+    button.textContent = previous;
+    button.disabled = false;
+  }, 850);
 });
 
-function addToCart(productId) {
-  const product = products.find((item) => item.id === productId);
+// منطق افزودن به سبد خرید
+function addToCart(id) {
+
+  const product = products.find(item => item.id === id);
 
   if (!product) return;
 
-  const existingItem = cart.find((item) => item.id === productId);
+  const existing = cart.find(item => item.id === id);
 
-  if (existingItem) {
-    existingItem.quantity += 1;
+  if (existing) {
+    existing.quantity += 1;
   } else {
     cart.push({
       id: product.id,
       title: product.title,
-      category: product.category,
       price: product.price,
       image: product.image,
       quantity: 1
@@ -272,12 +340,18 @@ function addToCart(productId) {
   renderCart();
 }
 
-// ---------- 10. نمایش سبد خرید ----------
+// عناصر سبد خرید
+const cartOverlay = $("#cartOverlay");
+const cartItems = $("#cartItems");
+const cartCount = $("#cartCount");
+const cartTotal = $("#cartTotal");
 
+// نمایش سبد خرید
 function renderCart() {
+
   cartItems.innerHTML = "";
 
-  if (cart.length === 0) {
+  if (!cart.length) {
     cartItems.innerHTML = `
       <p class="cart-empty">
         سبد خرید شما هنوز خالی است.
@@ -287,7 +361,8 @@ function renderCart() {
     `;
   }
 
-  cart.forEach((item) => {
+  cart.forEach(item => {
+
     const row = document.createElement("div");
     row.className = "cart-item";
 
@@ -296,8 +371,8 @@ function renderCart() {
     image.alt = item.title;
 
     image.addEventListener("error", () => {
-      image.style.visibility = "hidden";
-    });
+      image.remove();
+    }, { once: true });
 
     const info = document.createElement("div");
     info.className = "cart-item-info";
@@ -307,99 +382,208 @@ function renderCart() {
 
     const details = document.createElement("p");
     details.textContent =
-      `${formatPrice(item.price)} × ${new Intl.NumberFormat("fa-IR").format(item.quantity)}`;
-
-    const removeButton = document.createElement("button");
-    removeButton.className = "remove-item";
-    removeButton.type = "button";
-    removeButton.dataset.id = item.id;
-    removeButton.textContent = "حذف";
+      `${formatPrice(item.price)} × ${faNumber(item.quantity)}`;
 
     info.append(title, details);
-    row.append(image, info, removeButton);
 
-    cartItems.appendChild(row);
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "remove-item";
+    remove.dataset.id = item.id;
+    remove.textContent = "حذف";
+
+    row.append(image, info, remove);
+    cartItems.append(row);
   });
 
-  updateCartSummary();
+  const quantity = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  cartCount.textContent = faNumber(quantity);
+  cartTotal.textContent = formatPrice(total);
 }
 
-// ---------- 11. محاسبه تعداد و مبلغ سبد ----------
+// حذف محصول از سبد خرید
+cartItems.addEventListener("click", event => {
 
-function updateCartSummary() {
-  const totalQuantity = cart.reduce((sum, item) => {
-    return sum + item.quantity;
-  }, 0);
-
-  const totalPrice = cart.reduce((sum, item) => {
-    return sum + item.price * item.quantity;
-  }, 0);
-
-  cartCount.textContent = new Intl.NumberFormat("fa-IR").format(totalQuantity);
-  cartTotal.textContent = formatPrice(totalPrice);
-}
-
-// ---------- 12. حذف محصول از سبد خرید ----------
-
-cartItems.addEventListener("click", (event) => {
   const button = event.target.closest(".remove-item");
 
   if (!button) return;
 
-  const productId = Number(button.dataset.id);
-
-  cart = cart.filter((item) => item.id !== productId);
+  cart = cart.filter(
+    item => item.id !== Number(button.dataset.id)
+  );
 
   saveCart();
   renderCart();
 });
 
-// ---------- 13. باز و بسته کردن سبد خرید ----------
-
+// باز کردن سبد خرید
 function openCart() {
   cartOverlay.classList.add("active");
+  cartOverlay.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
 
-function closeCartDrawer() {
+// بستن سبد خرید
+function closeCart() {
   cartOverlay.classList.remove("active");
+  cartOverlay.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
 
-cartButton.addEventListener("click", openCart);
-closeCart.addEventListener("click", closeCartDrawer);
+$("#cartButton").addEventListener("click", openCart);
+$("#closeCart").addEventListener("click", closeCart);
 
-cartOverlay.addEventListener("click", (event) => {
+cartOverlay.addEventListener("click", event => {
   if (event.target === cartOverlay) {
-    closeCartDrawer();
+    closeCart();
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeCartDrawer();
-  }
-});
-
-// ---------- 14. منوی موبایل ----------
+// منوی موبایل
+const menuToggle = $("#menuToggle");
+const mainNav = $("#mainNav");
 
 menuToggle.addEventListener("click", () => {
-  mainNav.classList.toggle("active");
-  menuToggle.classList.toggle("active");
 
-  const isOpen = mainNav.classList.contains("active");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  const opened = mainNav.classList.toggle("active");
+
+  menuToggle.setAttribute(
+    "aria-expanded",
+    String(opened)
+  );
 });
 
-mainNav.querySelectorAll("a").forEach((link) => {
+// بستن منو پس از انتخاب لینک
+$$(".nav a").forEach(link => {
+
   link.addEventListener("click", () => {
+
     mainNav.classList.remove("active");
-    menuToggle.classList.remove("active");
-    menuToggle.setAttribute("aria-expanded", "false");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
   });
 });
 
-// ---------- 15. اجرای اولیه ----------
+// فرم تماس - حالت نمایشی
+$("#contactForm").addEventListener("submit", event => {
 
+  event.preventDefault();
+
+  const form = event.currentTarget;
+
+  if (!form.reportValidity()) return;
+
+  $("#contactFeedback").textContent =
+    "پیام شما در این نمونه ثبت شد. برای ارسال واقعی باید فرم به سرور متصل شود.";
+
+  form.reset();
+});
+
+// ورود و ثبت‌نام
+const authOverlay = $("#authOverlay");
+const authFeedback = $("#authFeedback");
+
+// باز کردن پنجره ورود
+function openAuth() {
+
+  authOverlay.classList.add("active");
+
+  authOverlay.setAttribute("aria-hidden", "false");
+
+  document.body.style.overflow = "hidden";
+
+  authFeedback.textContent = "";
+}
+
+// بستن پنجره ورود
+function closeAuth() {
+
+  authOverlay.classList.remove("active");
+
+  authOverlay.setAttribute("aria-hidden", "true");
+
+  document.body.style.overflow = "";
+}
+
+$("#authButton").addEventListener("click", openAuth);
+$("#authClose").addEventListener("click", closeAuth);
+
+authOverlay.addEventListener("click", event => {
+
+  if (event.target === authOverlay) {
+    closeAuth();
+  }
+});
+
+// تغییر تب ورود و ثبت‌نام
+$$(".auth-tab").forEach(tab => {
+
+  tab.addEventListener("click", () => {
+
+    const register = tab.dataset.auth === "register";
+
+    $$(".auth-tab").forEach(item => {
+      item.classList.toggle("active", item === tab);
+    });
+
+    $("#loginForm").hidden = register;
+    $("#registerForm").hidden = !register;
+
+    authFeedback.textContent = "";
+  });
+});
+
+// ارسال فرم ورود - حالت نمایشی
+$("#loginForm").addEventListener("submit", event => {
+
+  event.preventDefault();
+
+  if (!event.currentTarget.reportValidity()) return;
+
+  authFeedback.textContent =
+    "فرم ورود آماده است؛ برای ورود واقعی باید احراز هویت به بک‌اند متصل شود.";
+});
+
+// ارسال فرم ثبت‌نام - حالت نمایشی
+$("#registerForm").addEventListener("submit", event => {
+
+  event.preventDefault();
+
+  if (!event.currentTarget.reportValidity()) return;
+
+  authFeedback.textContent =
+    "فرم ثبت‌نام تکمیل شد؛ برای ساخت حساب واقعی به بک‌اند نیاز داریم.";
+});
+
+// بستن پنجره‌ها با کلید Escape
+document.addEventListener("keydown", event => {
+
+  if (event.key === "Escape") {
+
+    closeCart();
+    closeAuth();
+
+    mainNav.classList.remove("active");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  }
+});
+
+// اجرای اولیه
 renderCart();
-getProducts();
+loadProducts();
