@@ -246,7 +246,7 @@ img {
 
 .auth-button:hover {
   background: var(--wine);
-  color: var(--gold-light);
+  color: red;
 }
 
 .cart-button:hover {

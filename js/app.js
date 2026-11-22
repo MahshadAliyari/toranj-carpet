@@ -551,6 +551,7 @@ $("#loginForm").addEventListener("submit", event => {
   if (!event.currentTarget.reportValidity()) return;
 
   authFeedback.textContent =
+  "خوش آمدید."
 });
 
 // ارسال فرم ثبت‌نام - حالت نمایشی
@@ -561,6 +562,7 @@ $("#registerForm").addEventListener("submit", event => {
   if (!event.currentTarget.reportValidity()) return;
 
   authFeedback.textContent =
+  "ثبت نام شما با موفقیت انجام شد."
 });
 
 // بستن پنجره‌ها با کلید Escape
