@@ -14,7 +14,6 @@ const productsCount = $("#productsCount");
 const searchInput = $("#searchInput");
 
 // اطلاعات محصولات فروشگاه
-// عکس‌ها را خودت داخل پوشه assets/images قرار بده.
 const rugCatalog = [
   {
     id: 1,
@@ -125,7 +124,6 @@ async function loadProducts() {
     const apiItems = await response.json();
 
     // اطلاعات واقعی فروشگاه از کاتالوگ محلی گرفته می‌شود.
-    // API صرفاً برای تمرین دریافت داده استفاده شده است.
     products = rugCatalog.map((rug, index) => ({
       ...rug,
       apiId: apiItems[index]?.id ?? null
@@ -553,7 +551,6 @@ $("#loginForm").addEventListener("submit", event => {
   if (!event.currentTarget.reportValidity()) return;
 
   authFeedback.textContent =
-    "فرم ورود آماده است؛ برای ورود واقعی باید احراز هویت به بک‌اند متصل شود.";
 });
 
 // ارسال فرم ثبت‌نام - حالت نمایشی
@@ -564,7 +561,6 @@ $("#registerForm").addEventListener("submit", event => {
   if (!event.currentTarget.reportValidity()) return;
 
   authFeedback.textContent =
-    "فرم ثبت‌نام تکمیل شد؛ برای ساخت حساب واقعی به بک‌اند نیاز داریم.";
 });
 
 // بستن پنجره‌ها با کلید Escape
