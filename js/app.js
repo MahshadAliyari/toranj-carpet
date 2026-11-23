@@ -20,7 +20,7 @@ const rugCatalog = [
     title: "فرش دستباف طرح لچک ترنج",
     category: "فرش دستباف",
     price: 28500000,
-    color: "قرمز",
+    color: "کرم",
     image: "assets/images/farsh-1.jpg"
   },
   {
@@ -36,7 +36,7 @@ const rugCatalog = [
     title: "فرش کلاسیک طرح شاه‌عباسی",
     category: "فرش کلاسیک",
     price: 17200000,
-    color: "سرمه‌ای",
+    color: "قرمز",
     image: "assets/images/farsh-3.jpg"
   },
   {
@@ -52,7 +52,7 @@ const rugCatalog = [
     title: "فرش دستباف طرح تبریز",
     category: "فرش دستباف",
     price: 42000000,
-    color: "قرمز",
+    color: "سورمه ای",
     image: "assets/images/farsh-5.jpg"
   },
   {
@@ -69,14 +69,14 @@ const rugCatalog = [
     category: "فرش مدرن",
     price: 7600000,
     color: "طوسی",
-    image: "assets/images/farsh-4.jpg"
+    image: "assets/images/farsh-8.jpg"
   },
   {
     id: 8,
     title: "فرش لاکی گل‌ریز",
     category: "فرش کلاسیک",
     price: 16200000,
-    color: "قرمز",
+    color: "کرم",
     image: "assets/images/farsh-2.jpg"
   }
 ];
