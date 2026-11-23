@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="فروشگاه فرش ایران؛ انتخابی از هنر و اصالت ایرانی">
+  <meta name="description" content="فروشگاه فرش ترنج انتخابی از هنر و اصالت ایرانی">
   <title>فرش ترنج | هنر اصیل ایرانی</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
   <script src="js/app.js" defer></script>
@@ -30,7 +32,7 @@
       </button>
 
       <a href="#home" class="logo">
-        <span class="logo-mark">ت</span>
+        <img src="assets/images/footerr.jpg" alt="لوگوی فرش ترنج">
         <span class="logo-text">
           <strong>فرش ترنج</strong>
           <small>هنر اصیل ایرانی</small>
@@ -47,7 +49,13 @@
       </nav>
 
       <div class="header-actions">
-        <button class="auth-button" id="authButton" aria-label="ورود به حساب">👤</button>
+        <button class="auth-button" id="authButton" aria-label="ورود به حساب">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3.5" />
+            <path d="M5 20c0-3.8 2.8-6 7-6s7 2.2 7 6" />
+          </svg>
+        </button>
         <button class="cart-button" id="cartButton">
           <span>سبد خرید</span>
           <span class="cart-count" id="cartCount">۰</span>
@@ -228,11 +236,16 @@
             <button class="color-option active" type="button" data-filter-color="all" aria-label="همه رنگ‌ها">
               <span>همه</span>
             </button>
-            <button class="color-option" type="button" data-filter-color="قرمز" style="--swatch:#8c2630" aria-label="قرمز"></button>
-            <button class="color-option" type="button" data-filter-color="کرم" style="--swatch:#d7c4a3" aria-label="کرم"></button>
-            <button class="color-option" type="button" data-filter-color="سرمه‌ای" style="--swatch:#263b63" aria-label="سرمه‌ای"></button>
-            <button class="color-option" type="button" data-filter-color="قهوه‌ای" style="--swatch:#795039" aria-label="قهوه‌ای"></button>
-            <button class="color-option" type="button" data-filter-color="طوسی" style="--swatch:#858585" aria-label="طوسی"></button>
+            <button class="color-option" type="button" data-filter-color="قرمز" style="--swatch:#8c2630"
+              aria-label="قرمز"></button>
+            <button class="color-option" type="button" data-filter-color="کرم" style="--swatch:#d7c4a3"
+              aria-label="کرم"></button>
+            <button class="color-option" type="button" data-filter-color="سرمه‌ای" style="--swatch:#263b63"
+              aria-label="سرمه‌ای"></button>
+            <button class="color-option" type="button" data-filter-color="قهوه‌ای" style="--swatch:#795039"
+              aria-label="قهوه‌ای"></button>
+            <button class="color-option" type="button" data-filter-color="طوسی" style="--swatch:#858585"
+              aria-label="طوسی"></button>
           </div>
 
         </div>
@@ -330,7 +343,7 @@
             <span>☎</span>
             <div>
               <strong>شماره تماس</strong>
-              <p>۰۲۱-۱۲۳۴۵۶۷۸</p>
+              <p>021-12345678</p>
             </div>
           </div>
 
@@ -363,7 +376,7 @@
 
           <div class="form-row">
             <input type="text" name="name" placeholder="نام و نام خانوادگی *" required>
-            <input type="tel" name="phone" placeholder="شماره تماس *" required>
+            <input type="tel" name="phone" placeholder="شماره تماس *" required dir="rtl">
           </div>
 
           <input type="email" name="email" placeholder="ایمیل (اختیاری)">
@@ -386,38 +399,49 @@
 
   </main>
 
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner section-wrap">
 
+      <!-- برند و تصویر -->
       <div class="footer-brand">
-        
-            <strong>فرش ترنج</strong>
-            <small>هنر اصیل ایرانی</small>
-        
-        
 
-        <img src="assets/images/footerr.jpg" alt="جزئیات نقش فرش ایرانی" class="footer-image">
+        <img src="assets/images/footerr.jpg" alt="نشان فرش ترنج" class="footer-image">
 
-        <p>
-          همراه شما برای انتخاب زیبایی، اصالت و هنر ایرانی.
-          خانه‌ای گرم‌تر با نقش و نگار فرش ایرانی.
-        </p>
+        <div class="footer-brand-content">
+          <h3>هنر اصیل ایرانی</h3>
+
+          <p>
+            فرش ترنج، روایتگر زیبایی و اصالت هنر ایرانی است.
+            ما با گردآوری نقش‌ها و طرح‌های چشم‌نواز،
+            تلاش می‌کنیم گرمای هنر ایرانی را به خانه شما بیاوریم.
+          </p>
+
+          <span class="footer-slogan">
+            اصالت در نقش، زیبایی در زندگی ✦
+          </span>
+        </div>
+
       </div>
 
+      <!-- دسترسی سریع -->
       <div class="footer-links">
         <h3>دسترسی سریع</h3>
+
         <a href="#home">صفحه اصلی</a>
-        <a href="#categories">دسته‌بندی‌ها</a>
-        <a href="#products">محصولات</a>
+        <a href="#categories">دسته‌بندی فرش‌ها</a>
         <a href="#about">درباره ما</a>
+        <a href="#contact">تماس با ما</a>
       </div>
 
+      <!-- اطلاعات تماس -->
       <div class="footer-contact">
         <h3>ارتباط با ما</h3>
-        <p>تلفن:12345678-021</p>
+
+        <p>تلفن: 12345678-021</p>
         <p>ایمیل: info@farshiran.ir</p>
-        <p>تهران، ایران</p>
+        <p>آدرس: تهران، ایران</p>
       </div>
 
     </div>
@@ -428,6 +452,7 @@
     </div>
   </footer>
 
+
   <!-- AUTH MODAL -->
   <div class="auth-overlay" id="authOverlay" aria-hidden="true">
     <div class="auth-modal" role="dialog" aria-modal="true" aria-label="ورود و ثبت‌نام">
@@ -435,7 +460,7 @@
       <button class="modal-close" id="authClose" type="button" aria-label="بستن">×</button>
 
       <div class="auth-heading">
-        <span class="logo-mark">ت</span>
+        <img src="assets/images/footerr.jpg" alt="لوگوی فرش ترنج" class="auth-logo">
         <h2>به فرش ترنج خوش آمدید</h2>
         <p>برای ادامه وارد حساب خود شوید</p>
       </div>
@@ -446,14 +471,14 @@
       </div>
 
       <form id="loginForm">
-        <input type="tel" name="phone" placeholder="شماره تماس" required>
+        <input type="tel" name="phone" placeholder="شماره تماس" required dir="rtl">
         <input type="password" name="password" placeholder="رمز عبور" required>
         <button class="submit-button" type="submit">ورود به حساب</button>
       </form>
 
       <form id="registerForm" hidden>
         <input type="text" name="name" placeholder="نام و نام خانوادگی" required>
-        <input type="tel" name="phone" placeholder="شماره تماس" required>
+        <input type="tel" name="phone" placeholder="شماره تماس" required dir="rtl">
         <input type="password" name="password" placeholder="رمز عبور (حداقل ۶ کاراکتر)" minlength="6" required>
         <button class="submit-button" type="submit">ساخت حساب</button>
       </form>
@@ -485,4 +510,5 @@
   </div>
 
 </body>
+
 </html>
