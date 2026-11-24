@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
@@ -32,7 +32,7 @@
       </button>
 
       <a href="#home" class="logo">
-        <img src="assets/images/footerr.jpg" alt="لوگوی فرش ترنج">
+        <img src="assets/images/footerr.webp" alt="لوگوی فرش ترنج" width="320" height="400">
         <span class="logo-text">
           <strong>فرش ترنج</strong>
           <small>هنر اصیل ایرانی</small>
@@ -67,7 +67,6 @@
             <circle cx="18" cy="21" r="1" />
           </svg>
 
-          
           <span class="cart-count" id="cartCount">۰</span>
         </button>
 
@@ -82,13 +81,6 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="hero-inner">
-
-        <div class="hero-photo hero-photo-left">
-          <div class="hero-photo-frame">
-            <img src="assets/images/irani.jpg" alt="هنر بافت فرش ایرانی">
-          </div>
-          <span class="photo-caption">هنر دست ایرانی</span>
-        </div>
 
         <div class="hero-content">
           <span class="eyebrow">اصالت، هنر، زیبایی</span>
@@ -117,7 +109,9 @@
 
         <div class="hero-photo hero-photo-right">
           <div class="hero-photo-frame">
-            <img src="assets/images/footer.jpg" alt="فرش ایرانی در فضای سنتی">
+            <!-- عکس اصلی بالای صفحه (LCP): سریع و بدون lazy -->
+            <img src="assets/images/footer.webp" alt="فرش ایرانی در فضای سنتی" width="640" height="1137"
+              fetchpriority="high">
           </div>
           <span class="photo-caption">روایت نقش و رنگ</span>
         </div>
@@ -174,7 +168,8 @@
         <button class="category-card" type="button" data-category="فرش دستباف">
           <span class="category-number">۰۱</span>
           <span class="category-arch">
-            <img src="assets/images/farsh-6.jpg" alt="فرش دستباف">
+            <img src="assets/images/farsh-6.webp" alt="فرش دستباف" width="480" height="720" loading="lazy"
+              decoding="async">
           </span>
           <strong>فرش دستباف</strong>
           <small>هنر دست و اصالت</small>
@@ -184,7 +179,8 @@
         <button class="category-card" type="button" data-category="فرش ماشینی">
           <span class="category-number">۰۲</span>
           <span class="category-arch">
-            <img src="assets/images/farsh-1.jpg" alt="فرش ماشینی">
+            <img src="assets/images/farsh-1.webp" alt="فرش ماشینی" width="480" height="853" loading="lazy"
+              decoding="async">
           </span>
           <strong>فرش ماشینی</strong>
           <small>زیبایی و کاربرد</small>
@@ -194,7 +190,8 @@
         <button class="category-card" type="button" data-category="فرش کلاسیک">
           <span class="category-number">۰۳</span>
           <span class="category-arch">
-            <img src="assets/images/farsh-4.jpg" alt="فرش کلاسیک">
+            <img src="assets/images/farsh-4.webp" alt="فرش کلاسیک" width="480" height="853" loading="lazy"
+              decoding="async">
           </span>
           <strong>فرش کلاسیک</strong>
           <small>نقش‌های ماندگار</small>
@@ -204,7 +201,8 @@
         <button class="category-card" type="button" data-category="فرش مدرن">
           <span class="category-number">۰۴</span>
           <span class="category-arch">
-            <img src="assets/images/farsh-5.jpg" alt="فرش مدرن">
+            <img src="assets/images/farsh-5.webp" alt="فرش مدرن" width="480" height="720" loading="lazy"
+              decoding="async">
           </span>
           <strong>فرش مدرن</strong>
           <small>سادگی معاصر</small>
@@ -227,7 +225,7 @@
         <div class="products-toolbar">
           <label class="search-box">
             <span>⌕</span>
-            <input type="search" id="searchInput" placeholder="جستجوی نام یا دسته فرش...">
+            <input type="search" id="searchInput" aria-label="جستجوی فرش" placeholder="جستجوی نام یا دسته فرش...">
           </label>
           <span class="products-count" id="productsCount">در حال بارگذاری</span>
         </div>
@@ -287,22 +285,26 @@
 
         <div class="gallery-grid">
           <a href="#products" class="gallery-card gallery-large">
-            <img src="assets/images/irani.jpg" alt="فرش دستباف">
+            <img src="assets/images/irani.webp" alt="فرش دستباف" width="736" height="1308" loading="lazy"
+              decoding="async">
             <span>هنر دست ایرانی</span>
           </a>
 
           <a href="#products" class="gallery-card">
-            <img src="assets/images/classic.jpg" alt="فرش در دکوراسیون کلاسیک">
+            <img src="assets/images/classic.webp" alt="فرش در دکوراسیون کلاسیک" width="736" height="1308"
+              loading="lazy" decoding="async">
             <span>زیبایی کلاسیک</span>
           </a>
 
           <a href="#products" class="gallery-card">
-            <img src="assets/images/emroozi.jpg" alt="فرش در فضای مدرن">
+            <img src="assets/images/emroozi.webp" alt="فرش در فضای مدرن" width="736" height="1104" loading="lazy"
+              decoding="async">
             <span>هماهنگی با زندگی امروز</span>
           </a>
 
           <a href="#products" class="gallery-card">
-            <img src="assets/images/esalat.jpg" alt="فرش در خانه">
+            <img src="assets/images/esalat.webp" alt="فرش در خانه" width="735" height="981" loading="lazy"
+              decoding="async">
             <span>گرمای اصالت در خانه</span>
           </a>
         </div>
@@ -315,7 +317,8 @@
       <div class="about-inner section-wrap">
 
         <div class="about-visual">
-          <img src="assets/images/horse.jpg" alt="فرش ایرانی در فضای معماری سنتی">
+          <img src="assets/images/horse.webp" alt="فرش ایرانی در فضای معماری سنتی" width="736" height="920"
+            loading="lazy" decoding="async">
           <span class="about-stamp">اصالت<br>ایرانی</span>
         </div>
 
@@ -387,20 +390,20 @@
           </div>
 
           <div class="form-row">
-            <input type="text" name="name" placeholder="نام و نام خانوادگی *" required>
-            <input type="tel" name="phone" placeholder="شماره تماس *" required dir="rtl">
+            <input type="text" name="name" aria-label="نام و نام خانوادگی" placeholder="نام و نام خانوادگی *" required>
+            <input type="tel" name="phone" aria-label="شماره تماس" placeholder="شماره تماس *" required dir="rtl">
           </div>
 
-          <input type="email" name="email" placeholder="ایمیل (اختیاری)">
+          <input type="email" name="email" aria-label="ایمیل" placeholder="ایمیل (اختیاری)">
 
-          <select name="subject" required>
+          <select name="subject" aria-label="موضوع پیام" required>
             <option value="">موضوع پیام *</option>
             <option>مشاوره خرید</option>
             <option>پیگیری سفارش</option>
             <option>سایر موارد</option>
           </select>
 
-          <textarea name="message" rows="4" placeholder="متن پیام شما *" required></textarea>
+          <textarea name="message" rows="4" aria-label="متن پیام" placeholder="متن پیام شما *" required></textarea>
 
           <button type="submit" class="submit-button">ارسال پیام</button>
           <p id="contactFeedback" class="form-feedback" aria-live="polite"></p>
@@ -419,7 +422,8 @@
       <!-- برند و تصویر -->
       <div class="footer-brand">
 
-        <img src="assets/images/footerr.jpg" alt="نشان فرش ترنج" class="footer-image">
+        <img src="assets/images/footerr.webp" alt="نشان فرش ترنج" class="footer-image" width="320" height="400"
+          loading="lazy" decoding="async">
 
         <div class="footer-brand-content">
           <h3>هنر اصیل ایرانی</h3>
@@ -472,7 +476,8 @@
       <button class="modal-close" id="authClose" type="button" aria-label="بستن">×</button>
 
       <div class="auth-heading">
-        <img src="assets/images/footerr.jpg" alt="لوگوی فرش ترنج" class="auth-logo">
+        <img src="assets/images/footerr.webp" alt="لوگوی فرش ترنج" class="auth-logo" width="320" height="400"
+          loading="lazy" decoding="async">
         <h2>به فرش ترنج خوش آمدید</h2>
         <p>برای ادامه وارد حساب خود شوید</p>
       </div>
@@ -483,15 +488,15 @@
       </div>
 
       <form id="loginForm">
-        <input type="tel" name="phone" placeholder="شماره تماس" required dir="rtl">
-        <input type="password" name="password" placeholder="رمز عبور" required>
+        <input type="tel" name="phone" aria-label="شماره تماس" placeholder="شماره تماس" required dir="rtl">
+        <input type="password" name="password" aria-label="رمز عبور" placeholder="رمز عبور" required>
         <button class="submit-button" type="submit">ورود به حساب</button>
       </form>
 
       <form id="registerForm" hidden>
-        <input type="text" name="name" placeholder="نام و نام خانوادگی" required>
-        <input type="tel" name="phone" placeholder="شماره تماس" required dir="rtl">
-        <input type="password" name="password" placeholder="رمز عبور (حداقل ۶ کاراکتر)" minlength="6" required>
+        <input type="text" name="name" aria-label="نام و نام خانوادگی" placeholder="نام و نام خانوادگی" required>
+        <input type="tel" name="phone" aria-label="شماره تماس" placeholder="شماره تماس" required dir="rtl">
+        <input type="password" name="password" aria-label="رمز عبور" placeholder="رمز عبور (حداقل ۶ کاراکتر)" minlength="6" required>
         <button class="submit-button" type="submit">ساخت حساب</button>
       </form>
 

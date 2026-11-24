@@ -41,15 +41,15 @@ const rugCatalog = [
     category: "فرش دستباف",
     price: 28500000,
     color: "کرم",
-    image: "assets/images/farsh-1.jpg"
+    image: "assets/images/farsh-1.webp"
   },
   {
     id: 2,
     title: "فرش ماشینی طرح افشان",
     category: "فرش ماشینی",
     price: 8500000,
-    color: "کرم",
-    image: "assets/images/farsh-2.jpg"
+    color: "سرمه ای",
+    image: "assets/images/farsh-7.webp"
   },
   {
     id: 3,
@@ -57,7 +57,7 @@ const rugCatalog = [
     category: "فرش کلاسیک",
     price: 17200000,
     color: "قرمز",
-    image: "assets/images/farsh-3.jpg"
+    image: "assets/images/farsh-3.webp"
   },
   {
     id: 4,
@@ -65,7 +65,7 @@ const rugCatalog = [
     category: "فرش مدرن",
     price: 6900000,
     color: "طوسی",
-    image: "assets/images/farsh-4.jpg"
+    image: "assets/images/farsh-4.webp"
   },
   {
     id: 5,
@@ -73,7 +73,7 @@ const rugCatalog = [
     category: "فرش دستباف",
     price: 42000000,
     color: "سرمه‌ای", 
-    image: "assets/images/farsh-5.jpg"
+    image: "assets/images/farsh-5.webp"
   },
   {
     id: 6,
@@ -81,7 +81,7 @@ const rugCatalog = [
     category: "فرش کلاسیک",
     price: 19800000,
     color: "قهوه‌ای",
-    image: "assets/images/farsh-6.jpg"
+    image: "assets/images/farsh-6.webp"
   },
   {
     id: 7,
@@ -89,7 +89,7 @@ const rugCatalog = [
     category: "فرش مدرن",
     price: 7600000,
     color: "طوسی",
-    image: "assets/images/farsh-8.jpg" 
+    image: "assets/images/farsh-8.webp" 
   },
   {
     id: 8,
@@ -97,7 +97,7 @@ const rugCatalog = [
     category: "فرش کلاسیک",
     price: 16200000,
     color: "کرم",
-    image: "assets/images/farsh-2.jpg" 
+    image: "assets/images/farsh-2.webp" 
   }
 ];
 
