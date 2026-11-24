@@ -72,7 +72,7 @@ const rugCatalog = [
     title: "فرش دستباف طرح تبریز",
     category: "فرش دستباف",
     price: 42000000,
-    color: "سرمه‌ای", 
+    color: "سرمه‌ای",
     image: "assets/images/farsh-5.webp"
   },
   {
@@ -89,7 +89,7 @@ const rugCatalog = [
     category: "فرش مدرن",
     price: 7600000,
     color: "طوسی",
-    image: "assets/images/farsh-8.webp" 
+    image: "assets/images/farsh-8.webp"
   },
   {
     id: 8,
@@ -97,7 +97,7 @@ const rugCatalog = [
     category: "فرش کلاسیک",
     price: 16200000,
     color: "کرم",
-    image: "assets/images/farsh-2.webp" 
+    image: "assets/images/farsh-7.webp"
   }
 ];
 
@@ -517,7 +517,7 @@ on($("#contactForm"), "submit", event => {
 
   if (contactFeedback) {
     contactFeedback.textContent =
-    "پیام شما با موفقیت ثبت شد.";
+      "پیام شما با موفقیت ثبت شد.";
   }
 
   form.reset();
